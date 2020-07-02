@@ -31,6 +31,7 @@ namespace ExportarArqExcel.Controllers
         [HttpGet("excel")]
         public async Task<IActionResult> GerarExcelUsuarios()
         {
+            // Esta propriedade busca o caminho (path) da pasta "wwwroot" para geração do arquivo no final do método
             string webRootPath = _hostingEnvironment.WebRootPath;
             string nomeArquivo = "usuarios.xlsx";
             try
@@ -109,10 +110,11 @@ namespace ExportarArqExcel.Controllers
                 }
 
                 ms.Position = 0;
+
                 // Método herdado de BaseController que recebe a memoryStream, ContentType(diz que é um arquivo .xlsx) e o nome do arquivo.
                 var retorno = File(ms, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", nomeArquivo);
 
-                return Ok(retorno);
+                return retorno;
             }
             catch (Exception ex)
             {
